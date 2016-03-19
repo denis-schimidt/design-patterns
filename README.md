@@ -3,3 +3,4 @@ Abaixo alguns dos padrões mais utilizados em projetos
 - [x] Strategy 
 - [x] Null Object + Static Factory
 - [x] Template Method
+- [x] Factory Method
