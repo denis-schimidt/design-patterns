@@ -1,4 +1,4 @@
-package br.com.schimidtsolutions.design_patterns.template_method;
+package br.com.schimidtsolutions.design_patterns.bridge;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
@@ -17,11 +17,23 @@ public abstract class GeradorArquivoComBaseEntradaPadraoDados {
 	private List<String> dadosEntrada;
 	private FileOutputStream fileOutputStream;
 	private File arquivo;
+	private ProcessadorDados processadorDados;
 
-	GeradorArquivoComBaseEntradaPadraoDados(final Path path) throws IOException {
+	GeradorArquivoComBaseEntradaPadraoDados(final Path path, final ProcessadorDados posProcessador) throws IOException {
 		checkArgument(path != null, "O path não pode ser nulo.");
-
 		criarArquivo(path);
+		setProcessadorDados(posProcessador);
+	}
+
+	public GeradorArquivoComBaseEntradaPadraoDados(final Path path) throws IOException {
+		this(path, new ProcessadorDadosNulo());
+	}
+
+	public void setProcessadorDados(final ProcessadorDados processadorDados) {
+		checkArgument(processadorDados != null, "O processadorDados não pode ser nulo.");
+		this.processadorDados = processadorDados;
+
+		ajustarConfiguracoesExtrasProcessadorDados();
 	}
 
 	public File gerarArquivo() throws Exception {
@@ -77,6 +89,12 @@ public abstract class GeradorArquivoComBaseEntradaPadraoDados {
 	List<String> getDadosEntrada() {
 		return dadosEntrada;
 	}
+
+	ProcessadorDados getProcessadorDados() {
+		return processadorDados;
+	}
+
+	void ajustarConfiguracoesExtrasProcessadorDados() {}
 
 	abstract void abrirArquivo() throws IOException;
 

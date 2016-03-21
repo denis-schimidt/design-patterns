@@ -8,20 +8,25 @@ import com.google.common.base.Preconditions;
 
 public final class ContaEstacionamento {
 	private final Duration tempoDecorrido;
-	private final VeiculoCalculavel veiculo;
+	private VeiculoCalculavel veiculo;
 
 	public ContaEstacionamento(final LocalDateTime inicio, final LocalDateTime fim, final VeiculoCalculavel veiculo) {
-		validate(inicio, fim, veiculo);
+		validarDatas(inicio, fim, veiculo);
 
 		tempoDecorrido = Duration.between(inicio, fim);
-		this.veiculo = veiculo;
+		setVeiculo(veiculo);
 	}
 
-	private void validate(final LocalDateTime inicio, final LocalDateTime fim, final VeiculoCalculavel veiculo) {
+	private void validarDatas(final LocalDateTime inicio, final LocalDateTime fim, final VeiculoCalculavel veiculo) {
 		Preconditions.checkArgument(inicio != null, "O início não pode ser nulo.");
 		Preconditions.checkArgument(fim != null, "O fim não pode ser nulo.");
 		Preconditions.checkArgument(inicio.isBefore(fim), "O início não pode ser superior ao fim.");
+	}
+
+	public void setVeiculo(final VeiculoCalculavel veiculo) {
 		Preconditions.checkArgument(veiculo != null, "O veículo não pode ser nulo.");
+
+		this.veiculo = veiculo;
 	}
 
 	public ContaEstacionamento(final LocalDateTime inicio, final VeiculoCalculavel veiculo) {
