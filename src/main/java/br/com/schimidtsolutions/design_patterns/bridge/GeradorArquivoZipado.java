@@ -15,9 +15,10 @@ public class GeradorArquivoZipado extends GeradorArquivoComBaseEntradaPadraoDado
 
 	@Override
 	void ajustarConfiguracoesExtrasProcessadorDados() {
+		final ProcessadorDados processador = getProcessadorDados();
 
-		if (getProcessadorDados() instanceof ProcessadorDadosCompactados) {
-			zipOutputStream = ((ProcessadorDadosCompactados) getProcessadorDados()).getZipOutputStream();
+		if (processador instanceof ProcessadorDadosCompactados) {
+			zipOutputStream = ((ProcessadorDadosCompactados) processador).getZipOutputStream();
 
 		} else {
 			throw new IllegalArgumentException("Não foi possível obter o zipOutputStream proveniente do processador dados compactados.");

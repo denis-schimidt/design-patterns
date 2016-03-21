@@ -33,7 +33,9 @@ public abstract class GeradorArquivoComBaseEntradaPadraoDados {
 		checkArgument(processadorDados != null, "O processadorDados não pode ser nulo.");
 		this.processadorDados = processadorDados;
 
-		ajustarConfiguracoesExtrasProcessadorDados();
+		if (!processadorDados.getClass().equals(ProcessadorDadosNulo.class)) {
+			ajustarConfiguracoesExtrasProcessadorDados();
+		}
 	}
 
 	public File gerarArquivo() throws Exception {
