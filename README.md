@@ -5,3 +5,5 @@ Abaixo padrões demonstrados com  exemplos.
 - [x] Template Method
 - [x] Factory Method
 - [x] Bridge
+- [x] State com TDD
+
