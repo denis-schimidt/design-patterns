@@ -22,18 +22,18 @@ public class BrancoTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void deveLancarExcecaoParaNoNulo() {
-		branco.mudarCorDoNo(null, listaResposta);
+		branco.mudarCorNoAtual(null, listaResposta);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void deveLancarExcecaoParaListaRespostaNula() {
-		branco.mudarCorDoNo(new No("Teste"), null);
+		branco.mudarCorNoAtual(new No("Teste"), null);
 	}
 
 	@Test
 	public void deveMudarParaCinzaACorDentroDoNo() {
 		final No no = new No("Teste");
-		branco.mudarCorDoNo(no, listaResposta);
+		branco.mudarCorNoAtual(no, listaResposta);
 
 		assertTrue(no.getCor() == Cor.PRETO);
 	}
@@ -41,7 +41,7 @@ public class BrancoTest {
 	@Test
 	public void naoDeveFazerLocalizacaoEmProfundidade() {
 		final No no = mock(No.class);
-		branco.localizarNoMaisProfundo(no, listaResposta);
+		branco.aprofundarBuscaNosFilhos(no, listaResposta);
 
 		verify(no, never()).localizarNoMaisProfundo(listaResposta);
 	}

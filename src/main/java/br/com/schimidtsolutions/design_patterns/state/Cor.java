@@ -9,7 +9,7 @@ public enum Cor {
 	BRANCO {
 
 		@Override
-		public void mudarCorDoNo(final No no, final List<No> listaResposta) {
+		public void mudarCorNoAtual(final No no, final List<No> listaResposta) {
 			validarDadosEntrada(no, listaResposta);
 
 			no.setCor(Cor.CINZA, listaResposta);
@@ -19,27 +19,28 @@ public enum Cor {
 	CINZA {
 
 		@Override
-		void localizarNoMaisProfundo(final No no, final List<No> listaResposta) {
+		void aprofundarBuscaNosFilhos(final No no, final List<No> listaResposta) {
 			validarDadosEntrada(no, listaResposta);
 
 			no.getNosFilhos().forEach(noFilho -> noFilho.localizarNoMaisProfundo(listaResposta));
-			no.setCor(Cor.PRETO, listaResposta);
+
+			no.setCor(PRETO, listaResposta);
 		}
 	},
 
 	PRETO{
 
 		@Override
-		void localizarNoMaisProfundo(final No no, final List<No> listaResposta) {
+		void aprofundarBuscaNosFilhos(final No no, final List<No> listaResposta) {
 			validarDadosEntrada(no, listaResposta);
 
 			listaResposta.add(no);
 		}
 	};
 
-	void mudarCorDoNo(final No no, final List<No> listaResposta) {}
+	void mudarCorNoAtual(final No no, final List<No> listaResposta) {}
 
-	void localizarNoMaisProfundo(final No no, final List<No> listaResposta) {}
+	void aprofundarBuscaNosFilhos(final No no, final List<No> listaResposta) {}
 
 	private static void validarDadosEntrada(final No no, final List<No> listaResposta) {
 		Preconditions.checkArgument(no != null, "O no não pode ser nulo.");

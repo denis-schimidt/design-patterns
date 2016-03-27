@@ -22,17 +22,17 @@ public class CinzaTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void deveLancarExcecaoParaNoNulo() {
-		cinza.localizarNoMaisProfundo(null, listaResposta);
+		cinza.aprofundarBuscaNosFilhos(null, listaResposta);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void deveLancarExcecaoParaListaRespostaNula() {
-		cinza.localizarNoMaisProfundo(new No("Teste"), null);
+		cinza.aprofundarBuscaNosFilhos(new No("Teste"), null);
 	}
 
 	@Test
 	public void nuncaDeveMudarParaOutraCorDentroDoNo() {
-		cinza.mudarCorDoNo(no, listaResposta);
+		cinza.mudarCorNoAtual(no, listaResposta);
 
 		assertTrue(no.getCor().equals(cinza));
 	}

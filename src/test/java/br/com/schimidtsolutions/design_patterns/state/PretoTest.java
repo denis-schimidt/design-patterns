@@ -25,24 +25,24 @@ public class PretoTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void deveLancarExcecaoParaNoNulo() {
-		preto.localizarNoMaisProfundo(null, listaResposta);
+		preto.aprofundarBuscaNosFilhos(null, listaResposta);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void deveLancarExcecaoParaListaRespostaNula() {
-		preto.localizarNoMaisProfundo(no, null);
+		preto.aprofundarBuscaNosFilhos(no, null);
 	}
 
 	@Test
 	public void nuncaDeveMudarParaOutraCorDentroDoNo() {
-		preto.mudarCorDoNo(no, listaResposta);
+		preto.mudarCorNoAtual(no, listaResposta);
 
 		assertTrue(no.getCor().equals(preto));
 	}
 
 	@Test
 	public void deveAdicionarNoNaListaResposta() {
-		preto.localizarNoMaisProfundo(no, listaResposta);
+		preto.aprofundarBuscaNosFilhos(no, listaResposta);
 
 		assertThat(listaResposta, notNullValue());
 		assertThat(listaResposta.size(), is(1));
